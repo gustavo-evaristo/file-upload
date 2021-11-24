@@ -3,7 +3,7 @@ import GlobalStyles from '../styles/global';
 import { Container, Content } from './styles';
 import { Upload } from '../components/Upload';
 import { FileList } from '../components/FileList';
-import { uniqueId } from 'lodash';
+import { uniqueId, isEmpty } from 'lodash';
 import filesize from 'filesize';
 
 export const Home: React.FC = () => { 
@@ -31,7 +31,9 @@ export const Home: React.FC = () => {
             <GlobalStyles />
             <Content>
                 <Upload onUpload={files => handleFiles(files)}/>
-                <FileList />
+                {!isEmpty(uploadedFile) && (
+                    <FileList />
+                )}
             </Content>
         </Container>
     );
