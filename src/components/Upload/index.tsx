@@ -1,7 +1,31 @@
 import React from 'react';
+import Dropzone from 'react-dropzone';
 
-import {  } from './styles';
+import { DropContainer, UploadMessage } from './styles';
 
-const Upload: React.FC = () => (
-    <h1>Upload component</h1>
-);
+export const Upload: React.FC = () => {
+    const renderDragMessage = (isDragActive: boolean, isDragReject: boolean) => {
+        if (!isDragActive) {
+            return <UploadMessage>Arraste os arquivos aqui...</UploadMessage>
+        }
+
+        if (isDragReject) {
+            return <UploadMessage isError>Arquivo não suportado</UploadMessage>
+        }
+
+        return <UploadMessage isSuccess>Solte os arquivos aqui</UploadMessage>
+    };
+
+    return (
+        <div>
+            <Dropzone accept="image/*" onDropAccepted={() => {}}>
+                {({ getRootProps, getInputProps, isDragActive, isDragReject }) => (
+                    <DropContainer {...getRootProps()} isDragActive={isDragActive} isDragReject={isDragReject}>
+                        <input {...getInputProps()} />
+                        {renderDragMessage(isDragActive, isDragReject)}
+                    </DropContainer>
+                )}
+            </Dropzone>
+        </div>
+    )
+};
