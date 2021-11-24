@@ -11,6 +11,8 @@
     "@types/node": "^12.0.0",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
+    "filesize": "^8.0.6",
+    "lodash": "^4.17.21",
     "react": "^17.0.2",
     "react-circular-progressbar": "^2.0.4",
     "react-dom": "^17.0.2",
@@ -46,6 +48,7 @@
     ]
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.177",
     "@types/react-circular-progressbar": "^1.1.0",
     "@types/react-dropzone": "^5.1.0",
     "@types/styled-components": "^5.1.15"
