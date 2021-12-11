@@ -15,7 +15,7 @@ export const Home: React.FC = () => {
             file, 
             id: uniqueId(), 
             name: file.name, 
-            readableSeize: filesize(file.size),
+            readableSize: filesize(file.size),
             preview: URL.createObjectURL(file),
             progress: 0,
             uploaded: false,
@@ -23,7 +23,7 @@ export const Home: React.FC = () => {
             url: null
          }))
 
-         setUploadedFile(uploadedFile.concat(uploaded));
+         setUploadedFile(uploaded);
     };
 
       return (
@@ -32,7 +32,7 @@ export const Home: React.FC = () => {
             <Content>
                 <Upload onUpload={files => handleFiles(files)}/>
                 {!isEmpty(uploadedFile) && (
-                    <FileList />
+                    <FileList files={uploadedFile}/>
                 )}
             </Content>
         </Container>
