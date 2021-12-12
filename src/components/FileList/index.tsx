@@ -5,40 +5,42 @@ import { MdCheckCircle, MdError, MdLink } from "react-icons/md";
 import { Container, FileInfo, Preview } from "./styles";
 
 type Props = {
-  files: any[];
+  file: any;
+  progress: number;
+  fileLink?: string;
+  fileUploaded: boolean;
+  onDelete: () => void;
 };
 
-export const FileList: React.FC<Props> = ({ files }) => {
-    console.log(files);
+export const FileList: React.FC<Props> = ({ file, progress, fileLink, fileUploaded, onDelete}) => {
   return (
     <Container>
-      {files.map((file) => (
-        <li key={file.id}>
+        <li>
           <FileInfo>
             <Preview src={file.preview} />
             <div>
               <strong>{file.name}</strong>
               <span>
                 {file.readableSize} 
-                {!!file.url && (
-                <button onClick={() => {}}>Excluir</button>
+                {!!fileLink && (
+                <button onClick={onDelete}>Excluir</button>
                 )}
               </span>
             </div>
           </FileInfo>
 
           <div>
-            {!file.uploaded && !file.error && (
+            {!fileUploaded && !file.error && (
               <CircularProgressbar
                 styles={{ root: { width: 24 }, path: { stroke: "#7159c1" } }}
                 strokeWidth={10}
-                value={file.progress}
+                value={progress}
               />
             )}
 
-            {file.url && (
+            {!!fileLink && (
               <a
-                href="https://s2.best-wallpaper.net/wallpaper/3840x2160/1904/Superhero-Spider-Man_3840x2160.jpg"
+                href={fileLink}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -50,7 +52,7 @@ export const FileList: React.FC<Props> = ({ files }) => {
               </a>
             )}
 
-            {file.uploaded && (
+            {fileUploaded && (
               <MdCheckCircle
                 style={{ marginRight: 8 }}
                 size={24}
@@ -63,7 +65,6 @@ export const FileList: React.FC<Props> = ({ files }) => {
             )}
           </div>
         </li>
-      ))}
     </Container>
   );
 };
